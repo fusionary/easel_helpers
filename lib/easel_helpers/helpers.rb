@@ -16,11 +16,14 @@ module EaselHelpers
     
     protected
     
+    def other_than_grid?(classes)
+      ([classes].flatten.map(&:to_s) - EaselHelpers::Helpers::GridHelper::MULTIPLE_FRACTIONS).any?
+    end
+    
     def clean_css_classes(string_or_array, replace = {})
-      returning [] do |css_classes|
-        css_classes << [string_or_array].flatten.join(" ")
-        css_classes = css_classes.split(/ /).map(&:strip).uniq.join(" ").strip
-        
+      css_classes = [] + standardize_css_classes(string_or_array)
+      
+      if replace.any?
         replace.keys.each do |k|
           if css_classes.include? k
             css_classes.delete(k)
@@ -28,9 +31,22 @@ module EaselHelpers
           end
         end
       end
+      
+      if css_classes.any? && (fractions = css_classes & EaselHelpers::Helpers::GridHelper::MULTIPLE_FRACTIONS).any?
+        fractions.each do |f|
+          css_classes.delete(f)
+          css_classes << self.send(f)
+        end
+      end
+      
+      css_classes.map(&:strip).reject {|s| s.blank? }.uniq.join(" ").strip
     end
     
     private
+    
+    def standardize_css_classes(string_or_array)
+      [string_or_array].flatten.join(" ").split(/ /)
+    end
     
     BLOCK_CALLED_FROM_ERB = 'defined? __in_erb_template'
     

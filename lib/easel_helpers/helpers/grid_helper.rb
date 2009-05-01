@@ -30,6 +30,10 @@ module EaselHelpers
       }.freeze
       MULTIPLE_FRACTIONS = MULTIPLES.keys.map {|k| k.to_s }.freeze
       
+      def last_column
+        "col-last"
+      end
+      
       def column(size=nil, *args, &block)
         @_easel_column_count ||= application_width
         col(size, *args, &block)
@@ -92,9 +96,9 @@ module EaselHelpers
         
         css_classes = [] << options.delete(:class) << args
         css_classes << "col-#{@_easel_column_count}" unless options.delete(:suppress_col)
-        css_classes << "col-last" if size.to_sym == :full && @_easel_column_count != application_width
+        css_classes << last_column if size.to_sym == :full && @_easel_column_count != application_width
         
-        content_tag(:div, capture(&block), {:class => clean_css_classes(css_classes, {"last" => "col-last"})}.merge(options))
+        content_tag(:div, capture(&block), {:class => clean_css_classes(css_classes, {"last" => last_column})}.merge(options))
       end
       
     end

@@ -1,3 +1,2 @@
 require "easel_helpers/helpers"
-
-ActionView::Base.send :include, EaselHelpers::Helpers
+require "easel_helpers/rails_partial_caching"

@@ -5,6 +5,7 @@ lib/easel_helpers/helpers/link_helper.rb
 lib/easel_helpers/helpers/structure_helper.rb
 lib/easel_helpers/helpers/table_helper.rb
 lib/easel_helpers/helpers.rb
+lib/easel_helpers/rails_partial_caching.rb
 lib/easel_helpers.rb
 Manifest
 MIT-LICENSE
