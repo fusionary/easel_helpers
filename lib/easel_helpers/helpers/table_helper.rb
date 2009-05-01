@@ -1,7 +1,7 @@
 module EaselHelpers
   module Helpers
     module TableHelper
-    
+      
       def zebra_row(options = {}, &block)
         cycle_list = options.delete(:cycle_list) || [nil, "alt"]
         css_classes = [cycle(*cycle_list)] << options.delete(:class)

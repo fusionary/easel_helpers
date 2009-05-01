@@ -1,7 +1,7 @@
 module EaselHelpers
   module Helpers
     module StructureHelper
-    
+      
       def blockquote(*args, &block)
         options = args.extract_options!
         author = options.delete(:author)
@@ -18,7 +18,7 @@ module EaselHelpers
         
         concat(html)
       end
-    
+      
     end
   end
 end

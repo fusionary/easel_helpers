@@ -1,10 +1,12 @@
 lib/easel_helpers/helpers/date_helper.rb
 lib/easel_helpers/helpers/form_helper.rb
+lib/easel_helpers/helpers/grid_helper.rb
 lib/easel_helpers/helpers/link_helper.rb
 lib/easel_helpers/helpers/structure_helper.rb
 lib/easel_helpers/helpers/table_helper.rb
 lib/easel_helpers/helpers.rb
 lib/easel_helpers.rb
+Manifest
 MIT-LICENSE
 rails/init.rb
 Rakefile
@@ -12,4 +14,3 @@ README.textile
 tasks/easel_helpers_tasks.rake
 test/easel_helpers_test.rb
 test/test_helper.rb
-Manifest
