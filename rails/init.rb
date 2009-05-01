@@ -1,4 +1,3 @@
-require "hpricot"
 require "easel_helpers"
 
 ActionView::Base.send :include, EaselHelpers::Helpers

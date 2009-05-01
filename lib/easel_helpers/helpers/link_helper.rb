@@ -1,6 +1,7 @@
 module EaselHelpers
   module Helpers
     module LinkHelper
+      
       def link_button(*args, &block)
         doc = Hpricot(link_to(*args, &block))
         doc.at("a").inner_html = "<span>#{doc.at("a").inner_html}</span>"
