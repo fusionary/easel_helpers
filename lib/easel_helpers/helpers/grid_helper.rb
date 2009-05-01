@@ -39,6 +39,11 @@ module EaselHelpers
         col(size, *args, &block)
       end
       
+      def container(size=nil, *args, &block)
+        args = args.insert(0, :container)
+        column(size, *args, &block)
+      end
+      
       def method_missing_with_easel_widths(call, *args)
         # filter out any initial helper calls
         found = false

@@ -3,13 +3,13 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 require 'echoe'
 
-Echoe.new("easel_helpers", "0.1.1") do |p|
+Echoe.new("easel_helpers", "0.1.2") do |p|
   p.description = "Fusionary Rails View Helpers"
   p.url = "http://github.com/fusionary/easel_helpers"
   p.author = "Joshua Clayton"
   p.email = "joshua.clayton@gmail.com"
   p.ignore_pattern = ["tmp/*"]
-  p.development_dependencies = ["actionview >= 2.1.0", "activesupport >= 2.1.0"]
+  p.development_dependencies = ["actionview >= 2.1.0", "activesupport >= 2.1.0", "hpricot >= 0.8.1"]
 end
 
 desc 'Default: run unit tests.'
