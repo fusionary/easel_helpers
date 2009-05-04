@@ -3,7 +3,7 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 require 'echoe'
 
-Echoe.new("easel_helpers", "0.1.3") do |p|
+Echoe.new("easel_helpers", "0.1.4") do |p|
   p.description = "Fusionary Rails View Helpers"
   p.url = "http://github.com/fusionary/easel_helpers"
   p.author = "Joshua Clayton"

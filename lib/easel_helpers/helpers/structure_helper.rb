@@ -19,6 +19,21 @@ module EaselHelpers
         concat(html)
       end
       
+      def body(*args)
+        options = args.extract_options!
+        @_page_body_attributes ||= {}
+        
+        css_classes = [] << @_page_body_attributes.delete(:class) << args
+        @_page_body_attributes = @_page_body_attributes.merge(options)
+        @_page_body_attributes[:class] = clean_css_classes(css_classes)
+        
+        if block_given?
+          block = lambda { yield }
+          html = content_tag(:body, capture(&block), @_page_body_attributes)
+          return concat(html)
+        end
+      end
+      
     end
   end
 end

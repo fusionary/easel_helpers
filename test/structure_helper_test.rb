@@ -21,4 +21,34 @@ class StructureHelperTest < EaselHelpers::ViewTestCase
     
   end
   
+  context "body" do
+    
+    should "allow passing a block structure" do
+      show_view %(
+        <% body do %>body goes here<% end %>
+      ) do
+        assert_select "body", "body goes here"
+      end
+    end
+    
+    should "allow passing arguments" do
+      show_view %(
+        <% body :home, 'home-index', 'logged-in', :id => 'application' do %>body goes here<% end %>
+      ) do
+        assert_select "body#application.home.home-index.logged-in", "body goes here"
+      end
+    end
+    
+    should "allow multiple body definitions that set attributes" do
+      show_view %(
+        <% body :home, 'logged-in' %>
+        <% body :id => 'application' %>
+        <% body 'home-index', :id => 'application-override' do %>body goes here<% end %>
+      ) do
+        assert_select "body#application-override.home.home-index.logged-in", "body goes here"
+      end
+    end
+    
+  end
+  
 end
