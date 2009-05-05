@@ -15,7 +15,7 @@ module EaselHelpers
         options[:table] ||= {}
         
         headers = []
-        options[:headers].each_with_index do |header, index|
+        (options[:headers] || []).each_with_index do |header, index|
           head = [header].flatten
           opts = head.extract_options!
           
@@ -40,6 +40,8 @@ module EaselHelpers
         html =  content_tag(:table, 
                   content_tag(:thead, content_tag(:tr, headers.to_s)) + capture(&block), 
                     options[:table].merge(:class => clean_css_classes(table_css_classes)))
+        
+        reset_cycle
         concat(html)
       end
       
