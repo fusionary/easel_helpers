@@ -44,6 +44,31 @@ module EaselHelpers
         column(size, *args, &block)
       end
       
+      def clean_column(classes, &block)
+        size = classes.scan(/col-(\d+)/).flatten.last
+        
+        if size.nil?
+          html = capture(&block)
+          if block_given? && block_is_within_action_view?(block)
+            concat(html)
+          else
+            html
+          end
+        else
+          size = size.to_i
+          increase_depth(size)
+          html = capture(&block)
+          
+          if block_given? && block_is_within_action_view?(block)
+            concat(html)
+            decrease_depth(size)
+          else
+            decrease_depth(size)
+            html
+          end
+        end
+      end
+      
       def method_missing_with_easel_widths(call, *args)
         # filter out any initial helper calls
         found = false
@@ -72,13 +97,14 @@ module EaselHelpers
       def application_width; 24; end
       
       def increase_depth(size)
-        @_easel_current_width = @_easel_column_count.to_s
+        @_easel_current_width ||= []
+        @_easel_current_width.push @_easel_column_count.to_s
         @_easel_column_count = size.to_s =~ /^\d+$/ ? size.to_s.to_i : (@_easel_column_count*MULTIPLES[size]).to_i
       end
       
       def decrease_depth(size)
-        @_easel_column_count = size.is_a?(Integer) ? @_easel_current_width.to_i : (@_easel_column_count/MULTIPLES[size]).to_i
-        @_easel_current_width = nil
+        @_easel_column_count = size.is_a?(Integer) ? @_easel_current_width.last.to_i : (@_easel_column_count/MULTIPLES[size]).to_i
+        @_easel_current_width.pop
       end
       
       def col(size=nil, *args, &block)

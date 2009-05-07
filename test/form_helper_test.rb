@@ -56,6 +56,12 @@ class FormHelperTest < EaselHelpers::ViewTestCase
       end
     end
     
+    should "assign default class if last class is passed as the only class" do
+      show_view "<% set :half, :last do %>words<% end %>" do
+        assert_select "div.col-12.text.col-last", "words"
+      end
+    end
+    
   end
   
   context "fieldset" do

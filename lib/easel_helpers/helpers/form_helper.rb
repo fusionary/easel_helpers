@@ -11,9 +11,14 @@ module EaselHelpers
       def set(*args, &block)
         options = args.extract_options!
         css_classes = [] << options.delete(:class) << args
-        css_classes << "text" unless other_than_grid?(args - ["last", last_column])
+        css_classes << "text" unless other_than_grid?(args.map(&:to_s) - ["last", last_column.to_s])
         
-        html = content_tag(:div, capture(&block), options.merge(:class => clean_css_classes(css_classes, {"last" => last_column})))
+        css_classes = clean_css_classes(css_classes, {"last" => last_column})
+        
+        html = clean_column css_classes do
+          content_tag(:div, capture(&block), options.merge(:class => css_classes))
+        end
+        
         concat(html)
       end
       
@@ -30,7 +35,12 @@ module EaselHelpers
             {:class => clean_css_classes([options[:legend].delete(:class)] << "legend")}.merge(options[:legend]))
         end
         
-        html = content_tag(:fieldset, legend + capture(&block), options.merge(:class => clean_css_classes(css_classes, {"last" => last_column})))
+        css_classes = clean_css_classes(css_classes, {"last" => last_column})
+        
+        html = clean_column css_classes do
+          content_tag(:fieldset, legend + capture(&block), options.merge(:class => css_classes))
+        end
+        
         concat(html)
       end
       

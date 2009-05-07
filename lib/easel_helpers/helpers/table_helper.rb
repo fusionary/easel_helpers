@@ -37,9 +37,12 @@ module EaselHelpers
         
         table_css_classes = ["recordset"] << options[:table].delete(:class) << args
         
-        html =  content_tag(:table, 
-                  content_tag(:thead, content_tag(:tr, headers.to_s)) + capture(&block), 
-                    options[:table].merge(:class => clean_css_classes(table_css_classes)))
+        css_classes = clean_css_classes(table_css_classes, {"last" => last_column})
+        html =  clean_column css_classes do
+          content_tag(:table, 
+            content_tag(:thead, content_tag(:tr, headers.to_s)) + capture(&block), 
+              options[:table].merge(:class => css_classes))
+        end
         
         reset_cycle
         concat(html)
