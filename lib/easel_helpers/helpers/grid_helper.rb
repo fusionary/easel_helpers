@@ -97,8 +97,8 @@ module EaselHelpers
       def application_width; 24; end
       
       def increase_depth(size)
-        @_easel_current_width ||= []
-        @_easel_current_width.push @_easel_column_count.to_s
+        @_easel_current_width ||= [application_width.to_s]
+        @_easel_current_width.push @_easel_column_count.to_s unless @_easel_column_count.blank?
         @_easel_column_count = size.to_s =~ /^\d+$/ ? size.to_s.to_i : (@_easel_column_count*MULTIPLES[size]).to_i
       end
       

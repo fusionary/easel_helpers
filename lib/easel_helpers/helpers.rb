@@ -17,7 +17,7 @@ module EaselHelpers
     protected
     
     def other_than_grid?(classes)
-      ([classes].flatten.map(&:to_s) - EaselHelpers::Helpers::GridHelper::MULTIPLE_FRACTIONS).any?
+      (standardize_css_classes(classes).map(&:to_s) - EaselHelpers::Helpers::GridHelper::MULTIPLE_FRACTIONS).any?
     end
     
     def clean_css_classes(string_or_array, replace = {})
@@ -36,6 +36,7 @@ module EaselHelpers
         fractions.each do |f|
           css_classes.delete(f)
           css_classes << self.send(f)
+          css_classes << last_column if f == "full" && @_easel_column_count != application_width
         end
       end
       

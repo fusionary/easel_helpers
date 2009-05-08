@@ -59,6 +59,49 @@ class GridHelperTest < EaselHelpers::ViewTestCase
     end
   end
   
+  should "properly assign classes for generic helpers without column wrappers" do
+    template = %(
+      <% fieldset :hform, :half do %>
+        <% set :one_third do %>text<% end %>
+        <% set :two_thirds, :last do %>more text<% end %>
+        <% column do %>
+          <% column :one_third do %>one third<% end %>
+          <% column :two_thirds, :last do %>
+            <% column :half do %>half<% end %>
+            <% column :half, :last do %>last half<% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <% column :one_third do %>
+        <% column :one_fourth do %>two wide<% end %>
+        <% column :half do %>four wide<% end %>
+        <% column :one_fourth, :last do %>two more wide<% end %>
+      <% end %>
+      <% recordset :one_sixth, :last do %>table<% end %>
+    )
+    
+    show_view template do
+      assert_select "fieldset.hform.col-12" do
+        assert_select "div.col-4", "text"
+        assert_select "div.col-8.col-last", "more text"
+        
+        assert_select "div.col-12.col-last" do
+          assert_select "div.col-4", "one third"
+          assert_select "div.col-8.col-last" do
+            assert_select "div.col-4", "half"
+            assert_select "div.col-4.col-last", "last half"
+          end
+        end
+      end
+      assert_select "div.col-8" do
+        assert_select "div.col-2", "two wide"
+        assert_select "div.col-4", "four wide"
+        assert_select "div.col-2.col-last", "two more wide"
+      end
+      assert_select "table.col-4.col-last", "table"
+    end
+  end
+  
   should "properly assign classes for a deeply-nested view" do
     template = %(
       <% container do %>
@@ -71,7 +114,7 @@ class GridHelperTest < EaselHelpers::ViewTestCase
         <% end %>
         <% column :one_third do %>one third!<% end %>
         <% column :one_sixth, :last do %>
-          <% fieldset :vform, :full, :last  do %>
+          <% fieldset :vform, :full do %>
             <% set do %>text<% end %>
           <% end %>
         <% end %>
@@ -99,4 +142,5 @@ class GridHelperTest < EaselHelpers::ViewTestCase
       end
     end
   end
+  
 end
