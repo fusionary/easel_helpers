@@ -24,15 +24,15 @@ module EaselHelpers
       
       def fieldset(*args, &block)
         options = args.extract_options!
-        options[:legend] ||= {}
         css_classes = [] << options.delete(:class) << args
         title = args.shift if args.first.is_a?(String)
         legend = if title.blank?
           ""
         else
+          legend_opts = options.delete(:legend) || {}
           content_tag(:h3, 
             title, 
-            {:class => clean_css_classes([options[:legend].delete(:class)] << "legend")}.merge(options[:legend]))
+            {:class => clean_css_classes([legend_opts.delete(:class)] << "legend")}.merge(legend_opts))
         end
         
         css_classes = clean_css_classes(css_classes, {"last" => last_column})
