@@ -12,6 +12,7 @@ module EaselHelpers
         options = args.extract_options!
         css_classes = [] << options.delete(:class) << args
         css_classes << "text" unless other_than_grid?(args.map(&:to_s) - ["last", last_column.to_s])
+        css_classes << "text" if standardize_css_classes(css_classes).include?("textarea")
         
         css_classes = clean_css_classes(css_classes, {"last" => last_column})
         

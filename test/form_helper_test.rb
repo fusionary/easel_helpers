@@ -62,6 +62,12 @@ class FormHelperTest < EaselHelpers::ViewTestCase
       end
     end
     
+    should "assign default class if the class textarea is present" do
+      show_view "<% set :textarea do %>words<% end %>" do
+        assert_select "div.textarea.text", "words"
+      end
+    end
+    
   end
   
   context "fieldset" do
