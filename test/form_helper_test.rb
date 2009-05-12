@@ -6,7 +6,7 @@ class FormHelperTest < EaselHelpers::ViewTestCase
     
     should "default with the correct structure" do
       show_view "<%= submit_button 'Create' %>" do
-        assert_select "button.btn[type=submit]" do
+        assert_select "button.btn[type=submit][value=Create]" do
           assert_select "span", "Create"
         end
       end
@@ -14,7 +14,7 @@ class FormHelperTest < EaselHelpers::ViewTestCase
     
     should "allow adding additional classes" do
       show_view "<%= submit_button 'Create', 'adtl-class', :dumb %>" do
-        assert_select "button.btn.adtl-class.dumb[type=submit]" do
+        assert_select "button.btn.adtl-class.dumb[type=submit][value=Create]" do
           assert_select "span", "Create"
         end
       end
@@ -22,7 +22,15 @@ class FormHelperTest < EaselHelpers::ViewTestCase
     
     should "handle additional attributes set" do
       show_view "<%= submit_button 'Create', :kls, :id => 'my-id', :type => 'image' %>" do
-        assert_select "button.btn.kls#my-id[type=image]" do
+        assert_select "button.btn.kls#my-id[type=image][value=Create]" do
+          assert_select "span", "Create"
+        end
+      end
+    end
+    
+    should "allow overriding of value" do
+      show_view "<%= submit_button 'Create', :value => 'override' %>" do
+        assert_select "button.btn[type=submit][value=override]" do
           assert_select "span", "Create"
         end
       end

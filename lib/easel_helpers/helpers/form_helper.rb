@@ -5,7 +5,7 @@ module EaselHelpers
       def submit_button(value, *args)
         options = args.extract_options!
         css_classes = ["btn"] << options.delete(:class) << args
-        content_tag(:button, "<span>#{value}</span>", {:type => "submit", :class => clean_css_classes(css_classes, {"last" => last_column})}.merge(options))
+        content_tag(:button, "<span>#{value}</span>", {:value => value, :type => "submit", :class => clean_css_classes(css_classes, {"last" => last_column})}.merge(options))
       end
       
       def set(*args, &block)
