@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{easel_helpers}
-  s.version = "0.2.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joshua Clayton"]
-  s.date = %q{2009-05-12}
+  s.date = %q{2009-05-13}
   s.description = %q{Fusionary Rails View Helpers}
   s.email = %q{joshua.clayton@gmail.com}
   s.extra_rdoc_files = ["lib/easel_helpers/helpers/date_helper.rb", "lib/easel_helpers/helpers/form_helper.rb", "lib/easel_helpers/helpers/grid_helper.rb", "lib/easel_helpers/helpers/link_helper.rb", "lib/easel_helpers/helpers/structure_helper.rb", "lib/easel_helpers/helpers/table_helper.rb", "lib/easel_helpers/helpers.rb", "lib/easel_helpers/rails_partial_caching.rb", "lib/easel_helpers.rb", "README.textile", "tasks/easel_helpers_tasks.rake"]

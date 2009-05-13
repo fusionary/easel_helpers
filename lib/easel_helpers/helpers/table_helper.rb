@@ -41,7 +41,7 @@ module EaselHelpers
         html =  clean_column css_classes do
           content_tag(:table, 
             content_tag(:thead, content_tag(:tr, headers.to_s)) + capture(&block), 
-              options[:table].merge(:class => css_classes))
+              options[:table].merge(:class => css_classes, :cellspacing => 0))
         end
         
         reset_cycle

@@ -37,13 +37,13 @@ class TableHelperTest < EaselHelpers::ViewTestCase
     
     should "default with the correct structure" do
       show_view %(<% recordset do %>rows<% end %>) do
-        assert_select "table.recordset", "rows"
+        assert_select "table.recordset[cellspacing=0]", "rows"
       end
     end
     
     should "allow headers be set" do
       show_view %(<% recordset :headers => ["Header 1", "Header 2", "Header 3"] do %><tbody>rows</tbody><% end %>) do
-        assert_select "table.recordset" do
+        assert_select "table.recordset[cellspacing=0]" do
           assert_select "thead" do
             assert_select "tr" do
               assert_select "th.first", "Header 1"
@@ -62,7 +62,7 @@ class TableHelperTest < EaselHelpers::ViewTestCase
           <tbody>rows</tbody>
         <% end %>
       ) do
-        assert_select "table.recordset" do
+        assert_select "table.recordset[cellspacing=0]" do
           assert_select "thead" do
             assert_select "tr" do
               assert_select "th#over.first.mine", "Header 1"
@@ -75,13 +75,13 @@ class TableHelperTest < EaselHelpers::ViewTestCase
     
     should "allow classes be assigned in a comma-delimited manner" do
       show_view %(<% recordset "my-recordset", "car-list" do %><% end %>) do
-        assert_select "table.recordset.my-recordset.car-list"
+        assert_select "table.recordset.my-recordset.car-list[cellspacing=0]"
       end
     end
     
     should "allow additional attributes be set on the recordset" do
       show_view %(<% recordset :headers => %w(One Two Three), :table => {:id => "my-id", :class => "my-recordset"} do %><% end %>) do
-        assert_select "table#my-id.recordset.my-recordset" do
+        assert_select "table#my-id.recordset.my-recordset[cellspacing=0]" do
           assert_select "thead" do
             assert_select "tr" do
               assert_select "th", "One"
