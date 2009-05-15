@@ -1,5 +1,6 @@
 easel_helpers.gemspec
 lib/easel_helpers/helpers/date_helper.rb
+lib/easel_helpers/helpers/flash_helper.rb
 lib/easel_helpers/helpers/form_helper.rb
 lib/easel_helpers/helpers/grid_helper.rb
 lib/easel_helpers/helpers/link_helper.rb
