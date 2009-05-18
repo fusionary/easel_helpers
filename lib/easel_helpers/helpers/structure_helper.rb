@@ -6,7 +6,7 @@ module EaselHelpers
         options = args.extract_options!
         author = options.delete(:author)
         
-        bq =  content_tag(:blockquote, 
+        bq =  content_tag(:blockquote,
                 (option_quote = textilize(options.delete(:quote))).blank? ? capture(&block) : option_quote
               )
         
@@ -30,7 +30,7 @@ module EaselHelpers
         if block_given?
           block = lambda { yield }
           html = content_tag(:body, capture(&block), @_page_body_attributes)
-          return concat(html)
+          concat(html)
         end
       end
       

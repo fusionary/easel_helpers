@@ -19,16 +19,14 @@ module EaselHelpers
           head = [header].flatten
           opts = head.extract_options!
           
-          css_classes = [] << case index
+          css_classes = [] << opts.delete(:class) << case index
             when 0 then "first"
             when (options[:headers].size - 1) then "last"
           end
           
-          css_classes << opts.delete(:class)
-          
           headers << if head.first =~ /^\<th/
             th = Hpricot(head.first)
-            th.at("th")["class"] = clean_css_classes([th.at("th")['class'].to_s, css_classes])
+            th.at("th")["class"] = clean_css_classes([th.at("th")["class"].to_s, css_classes])
             th.to_html
           else
             content_tag(:th, head.first, opts.merge(:class => clean_css_classes(css_classes)))
@@ -38,9 +36,9 @@ module EaselHelpers
         table_css_classes = ["recordset"] << options[:table].delete(:class) << args
         
         css_classes = clean_css_classes(table_css_classes, {"last" => last_column})
-        html =  clean_column css_classes do
-          content_tag(:table, 
-            content_tag(:thead, content_tag(:tr, headers.to_s)) + capture(&block), 
+        html =  clean_column(css_classes) do
+          content_tag(:table,
+            content_tag(:thead, content_tag(:tr, headers.to_s)) + capture(&block),
               options[:table].merge(:class => css_classes, :cellspacing => 0))
         end
         

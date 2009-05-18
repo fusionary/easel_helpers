@@ -16,7 +16,7 @@ module EaselHelpers
         
         css_classes = clean_css_classes(css_classes, {"last" => last_column})
         
-        html = clean_column css_classes do
+        html = clean_column(css_classes) do
           content_tag(:div, capture(&block), options.merge(:class => css_classes))
         end
         
@@ -38,7 +38,7 @@ module EaselHelpers
         
         css_classes = clean_css_classes(css_classes, {"last" => last_column})
         
-        html = clean_column css_classes do
+        html = clean_column(css_classes) do
           content_tag(:fieldset, legend + capture(&block), options.merge(:class => css_classes))
         end
         
