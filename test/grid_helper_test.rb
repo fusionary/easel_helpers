@@ -5,7 +5,7 @@ class GridHelperTest < EaselHelpers::ViewTestCase
     template = %(
       <% container do %>
         <% column do %>
-          <% column :half do %>
+          <% column :half, :id => "primary" do %>
             <% column :one_third do %>
               one third of one half of 24 is 4
             <% end %>
@@ -15,7 +15,7 @@ class GridHelperTest < EaselHelpers::ViewTestCase
             <hr/>
             more text
           <% end %>
-          <% column :half, :last do %>
+          <% column :half, :last, :id => "secondary" do %>
             second column
           <% end %>
           <hr/>
@@ -28,6 +28,8 @@ class GridHelperTest < EaselHelpers::ViewTestCase
       assert_select ".container", 1
       assert_select ".col-24", 1
       assert_select ".col-12", 2
+      assert_select ".col-12#primary", 1
+      assert_select ".col-12#secondary", 1
       assert_select ".col-4", 2
       assert_select ".prepend-4", 1
       assert_select ".col-24.col-last", 0
