@@ -34,9 +34,9 @@ module EaselHelpers
         "col-last"
       end
       
-      def column(size=nil, *args, &block)
+      def column(*args, &block)
         @_easel_column_count ||= application_width
-        col(size, *args, &block)
+        col(*args, &block)
       end
       
       def container(size=nil, *args, &block)
@@ -107,8 +107,8 @@ module EaselHelpers
         @_easel_current_width.pop
       end
       
-      def col(size=nil, *args, &block)
-        size = :full if size.blank?
+      def col(*args, &block)
+        size = (MULTIPLE_FRACTIONS.include?(args.first.to_s) || args.first.is_a?(Integer)) ? args.shift : :full
         
         increase_depth(size)
         output_tag = generate_output_tag(size, *args, &block)
