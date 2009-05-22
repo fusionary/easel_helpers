@@ -12,18 +12,39 @@ class FlashHelperTest < EaselHelpers::ViewTestCase
     
     should "display all flash messages present" do
       show_view %(<%= render_flash(:structure => "Flash message", :error => "Warning message") %>) do
-        assert_select "p.structure.box.single-line", "Flash message"
-        assert_select "p.error.box.single-line", "Warning message"
+        assert_select "p.structure", "Flash message"
+        assert_select "p.error", "Warning message"
       end
     end
     
     should "not display a flash if it is blank" do
       show_view %(<%= render_flash(:structure => "", :error => nil) %>) do
-        assert_select "p.structure.box.single-line", false
-        assert_select "p.error.box.single-line", false
+        assert_select "p.structure", false
+        assert_select "p.error", false
       end
     end
     
+    should "filter by the :only option" do
+      show_view %(<%= render_flash({:structure => "Flash message", :error => "Warning message", :notice => "Notice!"}, {:only => [:structure, :error]}) %>) do
+        assert_select "p.structure", "Flash message"
+        assert_select "p.error", "Warning message"
+        assert_select "p.notice", false
+      end
+    end
+    
+    should "filter by the :except option" do
+      show_view %(<%= render_flash({:structure => "Flash message", :error => "Warning message", :notice => "Notice!"}, {:except => [:structure, :error]}) %>) do
+        assert_select "p.structure", false
+        assert_select "p.error", false
+        assert_select "p.notice", "Notice!"
+      end
+    end
+    
+    should "raise an error of :only and :except are both passed" do
+      assert_raise ArgumentError, /conflict/ do
+        show_view %(<%= render_flash({:structure => "Flash message"}, {:except => [:structure, :error], :only => :structure}) %>)
+      end
+    end
   end
   
 end
