@@ -19,7 +19,7 @@ module EaselHelpers
     protected
     
     def other_than_grid?(classes)
-      (standardize_css_classes(classes).map(&:to_s) - EaselHelpers::Helpers::GridHelper::MULTIPLE_FRACTIONS).any?
+      (standardize_css_classes(classes).map {|s| s.to_s } - EaselHelpers::Helpers::GridHelper::MULTIPLE_FRACTIONS).any?
     end
     
     def clean_css_classes(string_or_array, replace = {})
@@ -42,7 +42,7 @@ module EaselHelpers
         end
       end
       
-      css_classes.map(&:strip).reject {|s| s.blank? }.uniq.join(" ").strip
+      css_classes.map {|s| s.strip }.reject {|s| s.blank? }.uniq.join(" ").strip
     end
     
     private
