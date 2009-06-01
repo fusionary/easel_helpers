@@ -4,6 +4,7 @@ lib/easel_helpers/helpers/flash_helper.rb
 lib/easel_helpers/helpers/form_helper.rb
 lib/easel_helpers/helpers/grid_helper.rb
 lib/easel_helpers/helpers/link_helper.rb
+lib/easel_helpers/helpers/rjs_helper.rb
 lib/easel_helpers/helpers/structure_helper.rb
 lib/easel_helpers/helpers/table_helper.rb
 lib/easel_helpers/helpers.rb

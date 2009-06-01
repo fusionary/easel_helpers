@@ -5,6 +5,7 @@ require "easel_helpers/helpers/structure_helper"
 require "easel_helpers/helpers/table_helper"
 require "easel_helpers/helpers/grid_helper"
 require "easel_helpers/helpers/flash_helper"
+require "easel_helpers/helpers/rjs_helper"
 
 module EaselHelpers
   module Helpers
@@ -15,6 +16,7 @@ module EaselHelpers
     include TableHelper
     include GridHelper
     include FlashHelper
+    include RjsHelper
     
     protected
     
