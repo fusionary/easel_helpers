@@ -6,9 +6,9 @@ module EaselHelpers
         container_id = options[:container] || "flash-container"
         
         if options[:replace]
-          page.replace_html container_id, render_flash(flash)
+          page.replace_html container_id, messages(flash)
         else
-          page.insert_html :top, container_id, render_flash(flash)
+          page.insert_html :top, container_id, messages(flash)
         end
       end
       

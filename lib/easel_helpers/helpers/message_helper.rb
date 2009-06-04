@@ -1,23 +1,23 @@
 module EaselHelpers
   module Helpers
-    module FlashHelper
+    module MessageHelper
       
-      def render_flash(flash, options = {})
+      def messages(messages, options = {})
         except_keys = [options[:except]].flatten.compact
         only_keys = [options[:only]].flatten.compact
         
         raise ArgumentError, ":only and :except options conflict; use one or the other" if except_keys.any? && only_keys.any?
         
         keys = if except_keys.any?
-          flash.keys - except_keys
+          messages.keys - except_keys
         elsif only_keys.any?
-          flash.keys & only_keys
+          messages.keys & only_keys
         else
-          flash.keys
+          messages.keys
         end
         
         keys.map do |key|
-          content_tag :p, flash[key], :class => [key, "box", "single-line"].join(" ") unless flash[key].blank?
+          content_tag :p, messages[key], :class => [key, "box", "single-line"].join(" ") unless messages[key].blank?
         end.join
       end
       

@@ -2,12 +2,12 @@ require 'test_helper'
 
 class RjsHelperTest < ActiveSupport::TestCase
   include EaselHelpers::Helpers::RjsHelper
-  include EaselHelpers::Helpers::FlashHelper
+  include EaselHelpers::Helpers::MessageHelper
   
   context "inline_flash" do
     setup do
       @page = Object.new
-      self.expects(:render_flash).with({:notice => "Test!"}).returns("string")
+      self.expects(:messages).with({:notice => "Test!"}).returns("string")
     end
     
     should "default to inserting flash within div#flash-container" do
