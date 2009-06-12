@@ -6,12 +6,13 @@ class JqueryHelperTest < EaselHelpers::ViewTestCase
     
     setup do
       @whitespace = '\s+?'
-      @anything = '(.|\s)+?'
-      @anon_function_start_regex = '\(function\(\$\) \{'
-      @document_ready_start_regex = '\$\(document\)\.ready\(function\(\) \{'
+      @anything =   '(.|\s)+?'
       
-      @document_ready_end_regex = '\}\)\;'
-      @anon_function_end_regex = '\}\)\(jQuery\)\;'
+      @anon_function_start_regex  = Regexp.escape "(function($) {"
+      @document_ready_start_regex = Regexp.escape   "$(document).ready(function() {"
+      
+      @document_ready_end_regex   = Regexp.escape   "});"
+      @anon_function_end_regex    = Regexp.escape "})(jQuery);"
     end
     
     should "properly build the document ready script tag" do
