@@ -2,6 +2,7 @@ easel_helpers.gemspec
 lib/easel_helpers/helpers/date_helper.rb
 lib/easel_helpers/helpers/form_helper.rb
 lib/easel_helpers/helpers/grid_helper.rb
+lib/easel_helpers/helpers/jquery_helper.rb
 lib/easel_helpers/helpers/link_helper.rb
 lib/easel_helpers/helpers/message_helper.rb
 lib/easel_helpers/helpers/rjs_helper.rb
