@@ -19,16 +19,17 @@ module EaselHelpers
     include MessageHelper
     include RjsHelper
     include JqueryHelper
-    
+
     protected
-    
+
     def other_than_grid?(classes)
-      (standardize_css_classes(classes).map {|s| s.to_s } - EaselHelpers::Helpers::GridHelper::MULTIPLE_FRACTIONS).any?
+      (standardize_css_classes(classes).map {|s| s.to_s } -
+       EaselHelpers::Helpers::GridHelper::MULTIPLE_FRACTIONS).any?
     end
-    
+
     def clean_css_classes(string_or_array, replace = {})
       css_classes = [] + standardize_css_classes(string_or_array)
-      
+
       if replace.any?
         replace.keys.each do |k|
           if css_classes.include? k
@@ -37,26 +38,29 @@ module EaselHelpers
           end
         end
       end
-      
-      if css_classes.any? && (fractions = css_classes & EaselHelpers::Helpers::GridHelper::MULTIPLE_FRACTIONS).any?
-        fractions.each do |f|
-          css_classes.delete(f)
-          css_classes << self.send(f)
-          css_classes << last_column if f == "full" && @_easel_column_count != application_width
+
+      fractions = css_classes & EaselHelpers::Helpers::GridHelper::MULTIPLE_FRACTIONS
+      if css_classes.any? && fractions.any?
+        fractions.each do |fraction|
+          css_classes.delete(fraction)
+          css_classes << self.send(fraction)
+          if fraction == "full" && @_easel_column_count != application_width
+            css_classes << last_column 
+          end
         end
       end
-      
+
       css_classes.map {|s| s.strip }.reject {|s| s.blank? }.uniq.join(" ").strip
     end
-    
+
     private
-    
+
     def standardize_css_classes(string_or_array)
       [string_or_array].flatten.join(" ").split(/ /)
     end
-    
+
     BLOCK_CALLED_FROM_ERB = 'defined? __in_erb_template'
-    
+
     if RUBY_VERSION < '1.9.0'
       # Check whether we're called from an erb template.
       # We'd return a string in any other case, but erb <%= ... %>
@@ -70,6 +74,6 @@ module EaselHelpers
         block && eval(BLOCK_CALLED_FROM_ERB, block.binding)
       end
     end
-    
+
   end
 end

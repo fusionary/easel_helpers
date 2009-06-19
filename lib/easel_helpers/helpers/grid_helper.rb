@@ -99,6 +99,7 @@ module EaselHelpers
 
       def increase_depth(size)
         @_easel_current_width ||= [application_width.to_s]
+
         unless @_easel_column_count.blank?
           @_easel_current_width.push(@_easel_column_count.to_s)
         end
@@ -150,8 +151,8 @@ module EaselHelpers
         end
 
         css_classes = clean_css_classes(css_classes, {"last" => last_column})
-        content_tag(:div, 
-                    capture(&block), 
+        content_tag(:div,
+                    capture(&block),
                     {:class => css_classes}.merge(options))
       end
 

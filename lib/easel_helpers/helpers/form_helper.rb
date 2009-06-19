@@ -6,17 +6,20 @@ module EaselHelpers
         options = args.extract_options!
         css_classes = ["btn"] << options.delete(:class) << args
         css_classes = clean_css_classes(css_classes, {"last" => last_column})
-        content_tag(:button, "<span>#{value}</span>", {
-                    :value => value, 
-                    :type => "submit", 
-                    :class => css_classes}.merge(options))
+
+        content_tag :button, 
+                    "<span>#{value}</span>",
+                    { :value => value,
+                      :type => "submit",
+                      :class => css_classes
+                    }.merge(options)
       end
 
       def set(*args, &block)
         options = args.extract_options!
         css_classes = [] << options.delete(:class) << args
 
-        unless other_than_grid?(args.map(&:to_s) - ["last", last_column.to_s])
+        if !other_than_grid?(args.map(&:to_s) - ["last", last_column.to_s])
           css_classes << "text"
         end
 
@@ -27,9 +30,9 @@ module EaselHelpers
         css_classes = clean_css_classes(css_classes, {"last" => last_column})
 
         html = clean_column(css_classes) do
-          content_tag(:div, 
-                      capture(&block), 
-                      options.merge(:class => css_classes))
+          content_tag :div,
+                      capture(&block),
+                      options.merge(:class => css_classes)
         end
 
         concat(html)
@@ -44,17 +47,17 @@ module EaselHelpers
         else
           legend_opts = options.delete(:legend) || {}
           legend_classes = clean_css_classes([legend_opts.delete(:class)] << "legend")
-          content_tag(:h3, 
+          content_tag :h3, 
                       title, 
-                      {:class => legend_classes}.merge(legend_opts))
+                      {:class => legend_classes}.merge(legend_opts)
         end
 
         css_classes = clean_css_classes(css_classes, {"last" => last_column})
 
         html = clean_column(css_classes) do
-          content_tag(:fieldset, 
-                      legend + capture(&block), 
-                      options.merge(:class => css_classes))
+          content_tag :fieldset,
+                      legend + capture(&block),
+                      options.merge(:class => css_classes)
         end
 
         concat(html)
