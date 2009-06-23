@@ -17,3 +17,13 @@ rails/init.rb
 Rakefile
 README.textile
 tasks/easel_helpers_tasks.rake
+test/date_helper_test.rb
+test/form_helper_test.rb
+test/grid_helper_test.rb
+test/jquery_helper_test.rb
+test/link_helper_test.rb
+test/message_helper_test.rb
+test/rjs_helper_test.rb
+test/structure_helper_test.rb
+test/table_helper_test.rb
+test/test_helper.rb
