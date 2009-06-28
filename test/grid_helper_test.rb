@@ -29,6 +29,7 @@ class GridHelperTest < EaselHelpers::ViewTestCase
 
       show_view template do
         assert_select ".container", 1
+        assert_select ".container.col-24", 0
         assert_select ".col-24", 1
         assert_select ".col-12", 2
         assert_select ".col-12#primary", 1
@@ -109,7 +110,7 @@ class GridHelperTest < EaselHelpers::ViewTestCase
 
     should "properly assign classes for a deeply-nested view" do
       template = %(
-        <% container do %>
+        <% container :full do %>
           <% column :half do %>
             <% fieldset :hform, :half do %>
               <% set :one_third do %>text<% end %>
@@ -127,6 +128,7 @@ class GridHelperTest < EaselHelpers::ViewTestCase
       )
 
       show_view template do
+        assert_select "div.container.col-24", 1
         assert_select "div.container" do
           assert_select "div.col-12" do
             assert_select "fieldset.hform.col-6" do
@@ -190,7 +192,9 @@ class GridHelperTest < EaselHelpers::ViewTestCase
   context "column" do
 
     should "allow assigning options hash without having to define a width" do
-      show_view %(<% column :id => "my-custom-id", :class => "content" do %>words<% end %>) do
+      show_view %(
+        <% column :id => "my-custom-id", :class => "content" do %>words<% end %>
+      ) do
         assert_select "div.col-24.content#my-custom-id", "words"
       end
     end

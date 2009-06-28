@@ -52,8 +52,10 @@ module EaselHelpers
       end
 
       def container(size=nil, *args, &block)
+        opts = args.extract_options!
+        opts.merge!(:suppress_col => true) if size.nil?
         args = args.insert(0, :container)
-        column(size, *args, &block)
+        column(size, *([args, opts].flatten), &block)
       end
 
       def clean_column(classes, &block)
