@@ -147,6 +147,44 @@ class GridHelperTest < EaselHelpers::ViewTestCase
       end
     end
 
+    should "properly assign classes when using Blueprint grid" do
+      template = %(
+        <% container do %>
+          <% column do %>
+            <% column :half, :id => "primary" do %>
+              <% column :one_third do %>
+                one third of one half of 24 is 4
+              <% end %>
+              <% column :one_third, :last, prepend_one_third do %>
+                one third of one half of 24 is 4 (but prepended 4 as well)
+              <% end %>
+              <hr/>
+              more text
+            <% end %>
+            <% column :half, :last, :id => "secondary" do %>
+              second column
+            <% end %>
+            <hr/>
+            text
+          <% end %>
+        <% end %>
+      )
+      EaselHelpers::Helpers::GridHelper.blueprint_grid!
+      show_view template do
+        assert_select ".container", 1
+        assert_select ".span-24", 1
+        assert_select ".span-12", 2
+        assert_select ".span-12#primary", 1
+        assert_select ".span-12#secondary", 1
+        assert_select ".span-4", 2
+        assert_select ".prepend-4", 1
+        assert_select ".span-24.last", 0
+        assert_select ".span-12.last", 1
+        assert_select ".span-4.last", 1
+        assert_select "hr", 2
+      end
+      EaselHelpers::Helpers::GridHelper.easel_grid!
+    end
   end
 
   context "column" do
@@ -175,5 +213,10 @@ class GridHelperTest < EaselHelpers::ViewTestCase
       end
     end
 
+    should "allow tag overriding" do
+      show_view %(<% column :tag => :section do %>content<% end %>) do
+        assert_select "section.col-24", "content"
+      end
+    end
   end
 end

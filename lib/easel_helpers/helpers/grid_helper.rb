@@ -30,8 +30,20 @@ module EaselHelpers
       }.freeze
       MULTIPLE_FRACTIONS = MULTIPLES.keys.map {|key| key.to_s }.freeze
 
+      def self.easel_grid!
+        @@last_column = "col-last"
+        @@column_prefix = "col"
+      end
+
+      def self.blueprint_grid!
+        @@last_column = "last"
+        @@column_prefix = "span"
+      end
+
+      easel_grid!
+
       def last_column
-        "col-last"
+        @@last_column
       end
 
       def column(*args, &block)
@@ -45,7 +57,7 @@ module EaselHelpers
       end
 
       def clean_column(classes, &block)
-        size = classes.scan(/col-(\d+)/).flatten.last
+        size = classes.scan(/#{column_prefix}-(\d+)/).flatten.last
 
         if size.nil?
           html = capture(&block)
@@ -79,8 +91,8 @@ module EaselHelpers
         method_missing_without_easel_widths(call, *args) and return unless found
 
         # one of the widths is somewhere in the helper call; let's find it
-        call.to_s =~ /^((append|prepend|col)_)?(.+)$/
-        class_name = $2 || "col"
+        call.to_s =~ /^((append|prepend|#{column_prefix})_)?(.+)$/
+        class_name = $2 || column_prefix
         class_width = $3
 
         if MULTIPLES.keys.include?(class_width.to_sym)
@@ -143,7 +155,7 @@ module EaselHelpers
 
         css_classes = [] << options.delete(:class) << args
         unless options.delete(:suppress_col)
-          css_classes << "col-#{@_easel_column_count}"
+          css_classes << "#{column_prefix}-#{@_easel_column_count}"
         end
 
         if size.to_sym == :full && @_easel_column_count != application_width
@@ -151,11 +163,14 @@ module EaselHelpers
         end
 
         css_classes = clean_css_classes(css_classes, {"last" => last_column})
-        content_tag(:div,
+        content_tag(options[:tag] || :div,
                     capture(&block),
                     {:class => css_classes}.merge(options))
       end
 
+      def column_prefix
+        @@column_prefix
+      end
     end
   end
 end
