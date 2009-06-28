@@ -1,9 +1,9 @@
 require 'test_helper'
 
 class GridHelperTest < EaselHelpers::ViewTestCase
-  
+
   context "advanced grid structures" do
-    
+
     should "properly assign classes for a simple column layout" do
       template = %(
         <% container do %>
@@ -26,7 +26,7 @@ class GridHelperTest < EaselHelpers::ViewTestCase
           <% end %>
         <% end %>
       )
-      
+
       show_view template do
         assert_select ".container", 1
         assert_select ".col-24", 1
@@ -41,7 +41,7 @@ class GridHelperTest < EaselHelpers::ViewTestCase
         assert_select "hr", 2
       end
     end
-    
+
     should "properly assign classes for generic helpers" do
       template = %(
         <% column do %>
@@ -52,7 +52,7 @@ class GridHelperTest < EaselHelpers::ViewTestCase
           <% recordset :half, :last do %>table<% end %>
         <% end %>
       )
-      
+
       show_view template do
         assert_select "div.col-24" do
           assert_select "fieldset.hform.col-12" do
@@ -63,7 +63,7 @@ class GridHelperTest < EaselHelpers::ViewTestCase
         end
       end
     end
-    
+
     should "properly assign classes for generic helpers without column wrappers" do
       template = %(
         <% fieldset :hform, :half do %>
@@ -84,12 +84,12 @@ class GridHelperTest < EaselHelpers::ViewTestCase
         <% end %>
         <% recordset :one_sixth, :last do %>table<% end %>
       )
-      
+
       show_view template do
         assert_select "fieldset.hform.col-12" do
           assert_select "div.col-4", "text"
           assert_select "div.col-8.col-last", "more text"
-          
+
           assert_select "div.col-12.col-last" do
             assert_select "div.col-4", "one third"
             assert_select "div.col-8.col-last" do
@@ -106,7 +106,7 @@ class GridHelperTest < EaselHelpers::ViewTestCase
         assert_select "table.col-4.col-last", "table"
       end
     end
-    
+
     should "properly assign classes for a deeply-nested view" do
       template = %(
         <% container do %>
@@ -125,7 +125,7 @@ class GridHelperTest < EaselHelpers::ViewTestCase
           <% end %>
         <% end %>
       )
-      
+
       show_view template do
         assert_select "div.container" do
           assert_select "div.col-12" do
@@ -135,9 +135,9 @@ class GridHelperTest < EaselHelpers::ViewTestCase
             end
             assert_select "table.col-6.col-last", "table"
           end
-          
+
           assert_select "div.col-8", "one third!"
-          
+
           assert_select "div.col-4.col-last" do
             assert_select "fieldset.vform.col-4.col-last" do
               assert_select "div", "text"
@@ -146,17 +146,17 @@ class GridHelperTest < EaselHelpers::ViewTestCase
         end
       end
     end
-    
+
   end
-  
+
   context "column" do
-    
+
     should "allow assigning options hash without having to define a width" do
       show_view %(<% column :id => "my-custom-id", :class => "content" do %>words<% end %>) do
         assert_select "div.col-24.content#my-custom-id", "words"
       end
     end
-    
+
     should "allow explicit column assignment" do
       show_view %(
         <% column 6, :sidebar do %>
@@ -174,6 +174,6 @@ class GridHelperTest < EaselHelpers::ViewTestCase
         end
       end
     end
-    
+
   end
 end
