@@ -215,7 +215,7 @@ class GridHelperTest < EaselHelpers::ViewTestCase
 
     should "allow tag overriding" do
       show_view %(<% column :tag => :section do %>content<% end %>) do
-        assert_select "section.col-24", "content"
+        assert_select "section.col-24:not([tag=section])", "content"
       end
     end
   end

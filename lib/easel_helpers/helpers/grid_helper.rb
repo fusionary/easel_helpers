@@ -163,7 +163,7 @@ module EaselHelpers
         end
 
         css_classes = clean_css_classes(css_classes, {"last" => last_column})
-        content_tag(options[:tag] || :div,
+        content_tag(options.delete(:tag) || :div,
                     capture(&block),
                     {:class => css_classes}.merge(options))
       end
