@@ -70,6 +70,12 @@ class FormHelperTest < EaselHelpers::ViewTestCase
       end
     end
     
+    should "assign default class if error class is passed" do
+      show_view "<% set :half, :last, :error do %>words<% end %>" do
+        assert_select "div.col-12.text.col-last.error", "words"
+      end
+    end
+    
     should "assign default class if the class textarea is present" do
       show_view "<% set :textarea do %>words<% end %>" do
         assert_select "div.textarea.text", "words"

@@ -19,7 +19,7 @@ module EaselHelpers
         options = args.extract_options!
         css_classes = [] << options.delete(:class) << args
 
-        if !other_than_grid?(args.map(&:to_s) - ["last", last_column.to_s])
+        if !other_than_grid?(args.map(&:to_s) - ["error", "last", last_column.to_s])
           css_classes << "text"
         end
 

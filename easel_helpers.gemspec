@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{easel_helpers}
-  s.version = "0.2.14"
+  s.version = "0.2.15"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joshua Clayton"]
-  s.date = %q{2009-06-28}
+  s.date = %q{2009-07-02}
   s.description = %q{Fusionary Rails View Helpers}
   s.email = %q{joshua.clayton@gmail.com}
   s.extra_rdoc_files = ["lib/easel_helpers/helpers/date_helper.rb", "lib/easel_helpers/helpers/form_helper.rb", "lib/easel_helpers/helpers/grid_helper.rb", "lib/easel_helpers/helpers/jquery_helper.rb", "lib/easel_helpers/helpers/link_helper.rb", "lib/easel_helpers/helpers/message_helper.rb", "lib/easel_helpers/helpers/rjs_helper.rb", "lib/easel_helpers/helpers/structure_helper.rb", "lib/easel_helpers/helpers/table_helper.rb", "lib/easel_helpers/helpers.rb", "lib/easel_helpers/rails_partial_caching.rb", "lib/easel_helpers.rb", "README.textile", "tasks/easel_helpers_tasks.rake"]
@@ -24,18 +24,22 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
+  if s.respond_to? :specification_version then
+    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
+    s.specification_version = 3
+
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<actionview>, [">= 0", ">= 2.1.0"])
-      s.add_development_dependency(%q<activesupport>, [">= 0", ">= 2.1.0"])
-      s.add_development_dependency(%q<hpricot>, [">= 0", ">= 0.8.1"])
+      s.add_development_dependency(%q<actionview>, [">= 2.1.0"])
+      s.add_development_dependency(%q<activesupport>, [">= 2.1.0"])
+      s.add_development_dependency(%q<hpricot>, [">= 0.8.1"])
     else
-      s.add_dependency(%q<actionview>, [">= 0", ">= 2.1.0"])
-      s.add_dependency(%q<activesupport>, [">= 0", ">= 2.1.0"])
-      s.add_dependency(%q<hpricot>, [">= 0", ">= 0.8.1"])
+      s.add_dependency(%q<actionview>, [">= 2.1.0"])
+      s.add_dependency(%q<activesupport>, [">= 2.1.0"])
+      s.add_dependency(%q<hpricot>, [">= 0.8.1"])
     end
   else
-    s.add_dependency(%q<actionview>, [">= 0", ">= 2.1.0"])
-    s.add_dependency(%q<activesupport>, [">= 0", ">= 2.1.0"])
-    s.add_dependency(%q<hpricot>, [">= 0", ">= 0.8.1"])
+    s.add_dependency(%q<actionview>, [">= 2.1.0"])
+    s.add_dependency(%q<activesupport>, [">= 2.1.0"])
+    s.add_dependency(%q<hpricot>, [">= 0.8.1"])
   end
 end
