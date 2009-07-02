@@ -7,7 +7,7 @@ module EaselHelpers
         css_classes = ["btn"] << options.delete(:class) << args
         css_classes = clean_css_classes(css_classes, {"last" => last_column})
 
-        content_tag :button, 
+        content_tag :button,
                     "<span>#{value}</span>",
                     { :value => value,
                       :type => "submit",
@@ -24,7 +24,7 @@ module EaselHelpers
         end
 
         if standardize_css_classes(css_classes).include?("textarea")
-          css_classes << "text" 
+          css_classes << "text"
         end
 
         css_classes = clean_css_classes(css_classes, {"last" => last_column})
@@ -47,8 +47,8 @@ module EaselHelpers
         else
           legend_opts = options.delete(:legend) || {}
           legend_classes = clean_css_classes([legend_opts.delete(:class)] << "legend")
-          content_tag :h3, 
-                      title, 
+          content_tag :h3,
+                      title,
                       {:class => legend_classes}.merge(legend_opts)
         end
 

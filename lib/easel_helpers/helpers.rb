@@ -45,7 +45,7 @@ module EaselHelpers
           css_classes.delete(fraction)
           css_classes << self.send(fraction)
           if fraction == "full" && @_easel_column_count != application_width
-            css_classes << last_column 
+            css_classes << last_column
           end
         end
       end
