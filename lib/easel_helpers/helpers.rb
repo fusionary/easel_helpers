@@ -7,6 +7,7 @@ require "easel_helpers/helpers/grid_helper"
 require "easel_helpers/helpers/message_helper"
 require "easel_helpers/helpers/rjs_helper"
 require "easel_helpers/helpers/jquery_helper"
+require "easel_helpers/helpers/navigation_helper"
 
 module EaselHelpers
   module Helpers
@@ -19,6 +20,7 @@ module EaselHelpers
     include MessageHelper
     include RjsHelper
     include JqueryHelper
+    include NavigationHelper
 
     protected
 
