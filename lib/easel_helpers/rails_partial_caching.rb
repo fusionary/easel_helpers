@@ -4,7 +4,7 @@ module ActionView
 
     def render_partial_with_easel(*args)
       path = args.first[:partial]
-      locals = args.last
+      locals = args.last || {}
 
       easel_cached_column_counts = session[:easel_cached_column_counts] ||= {}
 
