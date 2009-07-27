@@ -60,6 +60,71 @@ class NavigationHelperTest < ActiveSupport::TestCase
     end
 
     context "parse_tab_options" do
+      context "calculating :active" do
+        setup do
+          stubs(:controller).returns(stub_everything)
+        end
+
+        should "be based on option" do
+          result = send(:parse_tab_options, "name", {:active => "words"})
+          assert_equal "words", result[:active]
+        end
+
+        should "be based on name" do
+          name = tableized_name = stub
+          name.expects(:gsub).with(/\s/, '').returns(tableized_name)
+          tableized_name.expects(:tableize).returns("name")
+
+          result = send(:parse_tab_options, name, {})
+          assert_equal "name", result[:active]
+        end
+      end
+
+      context "calculating :comparison" do
+        should "be based on option" do
+          result = send(:parse_tab_options, "name", {:active_compare => "active"})
+          assert_equal "active", result[:comparison]
+        end
+
+        should "be based on controller name" do
+          controller = stub(:controller_name => "controller-name")
+          expects(:controller).returns(controller)
+          result = send(:parse_tab_options, "name", {})
+          assert_equal "controller-name", result[:comparison]
+        end
+      end
+
+      context "calculating :compare" do
+        setup do
+          stubs(:controller).returns(stub_everything)
+        end
+
+        should "be based on option" do
+          result = send(:parse_tab_options, "name", {:compare => true})
+          assert_equal true, result[:compare]
+        end
+
+        should "have a default value" do
+          result = send(:parse_tab_options, "name")
+          assert_equal false, result[:compare]
+        end
+      end
+
+      context "calculating :li_classes" do
+        setup do
+          stubs(:controller).returns(stub_everything)
+        end
+
+        should "be based on option" do
+          result = send(:parse_tab_options, "name", {:class => "custom classes"})
+          assert_equal "custom classes", result[:li_classes]
+        end
+
+        should "be nil if no option is passed" do
+          result = send(:parse_tab_options, "name")
+          assert_nil result[:li_classes]
+        end
+      end
     end
   end
 end
