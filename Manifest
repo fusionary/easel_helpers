@@ -5,6 +5,7 @@ lib/easel_helpers/helpers/grid_helper.rb
 lib/easel_helpers/helpers/jquery_helper.rb
 lib/easel_helpers/helpers/link_helper.rb
 lib/easel_helpers/helpers/message_helper.rb
+lib/easel_helpers/helpers/navigation_helper.rb
 lib/easel_helpers/helpers/rjs_helper.rb
 lib/easel_helpers/helpers/structure_helper.rb
 lib/easel_helpers/helpers/table_helper.rb
@@ -23,6 +24,7 @@ test/grid_helper_test.rb
 test/jquery_helper_test.rb
 test/link_helper_test.rb
 test/message_helper_test.rb
+test/navigation_helper_test.rb
 test/rjs_helper_test.rb
 test/structure_helper_test.rb
 test/table_helper_test.rb
