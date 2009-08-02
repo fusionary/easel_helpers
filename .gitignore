@@ -2,3 +2,5 @@
 *.swp
 pkg
 doc
+coverage/*
+coverage.data
