@@ -29,7 +29,7 @@ module EaselHelpers
 
           headers << if head.first =~ /^\<th/
             th = Hpricot(head.first)
-            th_classes = th.at("th")["class"].to_s
+            th_classes = th.at("th")["class"].join
             th_classes = clean_css_classes([th_classes, css_classes])
             th.at("th")["class"] = th_classes
             th.to_html
@@ -47,7 +47,7 @@ module EaselHelpers
           table_options = options[:table]
           table_options.merge!(:class => css_classes, :cellspacing => 0)
           content_tag(:table,
-                      content_tag(:thead, content_tag(:tr, headers.to_s)) + \
+                      content_tag(:thead, content_tag(:tr, headers.join)) + \
                         capture(&block),
                       table_options)
         end

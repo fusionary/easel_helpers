@@ -160,7 +160,7 @@ module EaselHelpers
           css_classes << "#{column_prefix}-#{@_easel_column_count}"
         end
 
-        if size.to_sym == :full && @_easel_column_count != application_width
+        if (size.to_sym rescue nil) == :full && @_easel_column_count != application_width
           css_classes << last_column
         end
 
