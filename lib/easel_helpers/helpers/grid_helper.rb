@@ -114,7 +114,7 @@ module EaselHelpers
       def increase_depth(size)
         @_easel_current_width ||= [application_width.to_s]
 
-        unless @_easel_column_count.blank?
+        if @_easel_column_count.present?
           @_easel_current_width.push(@_easel_column_count.to_s)
         end
 

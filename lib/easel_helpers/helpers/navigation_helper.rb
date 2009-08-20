@@ -7,7 +7,7 @@ module EaselHelpers
         active = "active" if (opts[:active] == opts[:comparison]) || opts[:compare]
         css_classes = [] << opts[:li_classes] << active
         css_classes = clean_css_classes(css_classes)
-        li_options.merge!(:class => css_classes) unless css_classes.blank?
+        li_options.merge!(:class => css_classes) if css_classes.present?
 
         content_tag :li,
                     link_to(name, path, options),

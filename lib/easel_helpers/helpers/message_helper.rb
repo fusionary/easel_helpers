@@ -19,7 +19,7 @@ module EaselHelpers
         end
 
         keys.map do |key|
-          unless messages[key].blank?
+          if messages[key].present?
             content_tag :p,
                         messages[key],
                         :class => [key, "box", "single-line"].join(" ")
