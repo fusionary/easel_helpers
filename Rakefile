@@ -1,7 +1,7 @@
-require 'rake'
-require 'rake/testtask'
-require 'rcov/rcovtask'
-require 'echoe'
+require "rake"
+require "rake/testtask"
+require "rcov/rcovtask"
+require "echoe"
 
 Echoe.new("easel_helpers", "0.3.0") do |p|
   p.description = "Fusionary Rails View Helpers"
@@ -14,5 +14,5 @@ end
 
 Rcov::RcovTask.new("rcov:current") do |t|
   t.libs << "test"
-  t.test_files = FileList['test/*_test.rb']
+  t.test_files = FileList["test/*_test.rb"]
 end
